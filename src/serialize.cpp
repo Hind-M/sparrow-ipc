@@ -197,7 +197,7 @@ std::vector<uint8_t> serialize_primitive_array(const sparrow::primitive_array<T>
         // Copy the RecordBatch metadata into the buffer
         memcpy(dst, batch_builder.GetBufferPointer(), batch_meta_len);
         // Add padding to align the body to an 8-byte boundary
-        if (aligned_batch_meta_len >= batch_meta_len)
+        if (static_cast<size_t>(aligned_batch_meta_len) >= batch_meta_len)
         {
             memset(dst + batch_meta_len, 0, aligned_batch_meta_len - batch_meta_len);
         }
